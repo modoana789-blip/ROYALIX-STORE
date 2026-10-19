@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Shadow Empire | Luxury Collection</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0a0a0a;
+      color: #f5f0e6;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      border-bottom: 1px solid #292217;
+    }
+    .logo {
+      color: #d8b56d;
+      font-size: 23px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav a {
+      color: #eee;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 14px;
+    }
+    .hero {
+      min-height: 490px;
+      display: flex;
+      align-items: center;
+      padding: 65px 9%;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.15), #0a0a0a 95%),
+        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85') center/cover;
+    }
+    .hero-content { max-width: 520px; }
+    .eyebrow {
+      color: #d8b56d;
+      letter-spacing: 3px;
+      font-size: 12px;
+    }
+    h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.2;
+      margin: 20px 0;
+    }
+    h1 span { color: #d8b56d; }
+    .hero p { color: #c2bdb3; line-height: 1.9; }
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 15px 27px;
+      background: #d8b56d;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .section { padding: 60px 7%; }
+    .section-title { text-align: center; margin-bottom: 35px; }
+    .section-title h2 { font-size: 30px; }
+    .section-title p { color: #aaa; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .product {
+      border: 1px solid #302719;
+      background: #111;
+      padding-bottom: 22px;
+    }
+    .product img {
+      width: 100%;
+      aspect-ratio: 4 / 4.3;
+      object-fit: cover;
+      display: block;
+    }
+    .product h3 { padding: 0 16px; }
+    .product p { color: #d8b56d; padding: 0 16px; }
+    .product a {
+      display: block;
+      text-align: center;
+      margin: 15px 16px 0;
+      padding: 12px;
+      border: 1px solid #d8b56d;
+      color: #d8b56d;
+      text-decoration: none;
+    }
+    .note {
+      text-align: center;
+      color: #aaa;
+      line-height: 1.9;
+    }
+    footer {
+      text-align: center;
+      padding: 28px;
+      border-top: 1px solid #302719;
+      color: #999;
+      font-size: 13px;
+    }
+    @media (max-width: 700px) {
+      header { padding: 18px 5%; }
+      nav a { margin-right: 9px; font-size: 12px; }
+      .hero { min-height: 420px; padding: 45px 7%; }
+      .products { grid-template-columns: 1fr; }
+      .section { padding: 45px 6%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">SHADOW EMPIRE</div>
+    <nav>
+      <a href="#home">الرئيسية</a>
+      <a href="#collection">المجموعة</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">LUXURY • STYLE • DISTINCTION</div>
+        <h1>الفخامة تبدأ<br>من <span>اختيارك</span></h1>
+        <p>اكتشف مجموعة مختارة من المنتجات العصرية والإكسسوارات المميزة، بتجربة تسوق تجمع الأناقة والبساطة.</p>
+        <a class="button" href="#collection">اكتشف المجموعة</a>
+      </div>
+    </section>
+
+    <section class="section" id="collection">
+      <div class="section-title">
+        <div class="eyebrow">OUR COLLECTION</div>
+        <h2>اختيارات مميزة</h2>
+        <p>اكتشف مجموعتنا المختارة بعناية</p>
+      </div>
+
+      <div class="products">
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80" alt="سماعات أنيقة">
+          <h3>سماعات عصرية</h3>
+          <p>أضف السعر بعد تحديد المنتج</p>
+          <a href="#contact">استفسر عن المنتج</a>
+        </article>
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="ساعة يد">
+          <h3>ساعة بتصميم أنيق</h3>
+          <p>أضف السعر بعد تحديد المنتج</p>
+          <a href="#contact">استفسر عن المنتج</a>
+        </article>
+        <article class="product">
+          <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=700&q=80" alt="قطعة بتصميم عصري">
+          <h3>تصميم عصري</h3>
+          <p>أضف السعر بعد تحديد المنتج</p>
+          <a href="#contact">استفسر عن المنتج</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section note" id="contact">
+      <div class="eyebrow">SHADOW EMPIRE</div>
+      <h2>تجربة تسوق بطابع مختلف</h2>
+      <p>قريبًا: تفاصيل التواصل والطلب وخيارات التوصيل.</p>
+    </section>
+  </main>
+
+  <footer>© 2026 Shadow Empire — جميع الحقوق محفوظة</footer>
+</body>
+</html>
