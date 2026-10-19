@@ -1,48 +1,331 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta name="description" content="Shadow Empire - هواتف وإلكترونيات وإكسسوارات ومنتجات فاخرة.">
+  <title>Shadow Empire | متجر الفخامة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Changa:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface-2: #1c1912;
+      --gold: #d8b66a;
+      --gold-light: #f0d99b;
+      --text: #f7f5ef;
+      --muted: #c2beb4;
+      --border: rgba(216,182,106,.28);
+      --radius: 16px;
+      --shadow: 0 14px 36px rgba(0,0,0,.28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Changa", sans-serif; line-height: 1.85;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1160px, 92%); margin-inline: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(10,10,10,.94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      min-height: 76px; display: flex; align-items: center;
+      justify-content: space-between; gap: 22px; flex-wrap: wrap; padding-block: 12px;
+    }
+    .brand { font: 800 23px/1.3 "Cairo", sans-serif; letter-spacing: .4px; color: var(--gold); }
+    nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav a { color: var(--muted); font-size: 14px; transition: color .2s; }
+    nav a:hover { color: var(--gold-light); }
+    .hero {
+      padding: clamp(60px, 10vw, 112px) 0 82px; text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, #3b2d18 0%, #19140d 32%, var(--bg) 74%);
+      border-bottom: 1px solid rgba(216,182,106,.12);
+    }
+    .eyebrow { color: var(--gold); letter-spacing: 2px; font-size: 12px; text-transform: uppercase; }
+    h1, h2, h3 { font-family: "Cairo", sans-serif; line-height: 1.5; }
+    h1 { font-size: clamp(34px, 6vw, 62px); margin: 12px 0; font-weight: 800; }
+    .gold { color: var(--gold-light); }
+    .hero p { color: var(--muted); max-width: 650px; margin: 0 auto 22px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid var(--gold); color: var(--gold-light); padding: 10px 18px;
+      border-radius: 8px; font: 600 14px "Changa", sans-serif; transition: .2s;
+      background: transparent; cursor: pointer;
+    }
+    .btn:hover { background: var(--gold); color: #111; }
+    section { padding: 62px 0; }
+    .section-head { text-align: center; margin-bottom: 28px; }
+    .section-head h2 { color: var(--gold-light); font-size: clamp(24px, 4vw, 34px); margin: 0 0 8px; }
+    .section-head p { margin: 0; color: var(--muted); }
+    .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; margin-bottom: 28px; }
+    .filter-btn {
+      font: 500 13px "Changa", sans-serif; padding: 8px 14px; border-radius: 999px;
+      color: var(--muted); background: #111; border: 1px solid #393126; cursor: pointer;
+    }
+    .filter-btn.active, .filter-btn:hover { color: #111; background: var(--gold); border-color: var(--gold); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+    .card {
+      min-width: 0; overflow: hidden; border-radius: var(--radius); background: var(--surface);
+      border: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column;
+      transition: transform .2s, border-color .2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(240,217,155,.7); }
+    .photo { height: 230px; background: #201c15; overflow: hidden; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+    .card:hover .photo img { transform: scale(1.035); }
+    .info { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+    .category { color: var(--gold); font-size: 11px; letter-spacing: .4px; }
+    .info h3 { margin: 4px 0 8px; font-size: 19px; font-weight: 700; }
+    .info p { color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0 0 14px; flex: 1; }
+    .price-box {
+      border: 1px solid rgba(216,182,106,.35); background: var(--surface-2);
+      padding: 11px 13px; border-radius: 10px; margin-top: auto;
+    }
+    .price-label { display: block; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .price { display: block; color: var(--gold-light); font: 800 21px/1.6 "Cairo", sans-serif; }
+    .price small { font: 600 12px "Changa", sans-serif; color: var(--gold); }
+    .price-note { display: block; margin-top: 4px; color: #b9b2a4; font-size: 10px; line-height: 1.7; }
+    .card .btn { width: 100%; margin-top: 12px; }
+    .notice {
+      margin-top: 24px; padding: 14px 16px; color: var(--muted); background: #111;
+      border: 1px solid #2f291e; border-radius: 10px; font-size: 12px;
+    }
+    .delivery {
+      background: linear-gradient(135deg, #19150e, #101010); border-block: 1px solid var(--border);
+      text-align: center;
+    }
+    .delivery h2 { color: var(--gold-light); margin: 0 0 8px; }
+    .delivery p { color: var(--muted); margin: 6px auto; max-width: 680px; }
+    footer { padding: 30px 0; text-align: center; color: #aaa397; font-size: 12px; }
+    footer .brand { display: block; margin-bottom: 6px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 600px) {
+      .nav { justify-content: center; }
+      nav { justify-content: center; gap: 14px; }
+      .grid { grid-template-columns: 1fr; gap: 16px; }
+      .photo { height: 250px; }
+      section { padding: 46px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">SHADOW EMPIRE</a>
+      <nav aria-label="التنقل الرئيسي">
+        <a href="#home">الرئيسية</a>
+        <a href="#products">المنتجات</a>
+        <a href="#delivery">التوصيل</a>
+      </nav>
+    </div>
+  </header>
 
-/* الخطوط */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Changa:wght@400;500;600;700&display=swap');
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="eyebrow">ELEGANCE • TECHNOLOGY • STYLE</div>
+        <h1>الفخامة تبدأ من <span class="gold">اختيارك</span></h1>
+        <p>هواتف حديثة، إلكترونيات، إكسسوارات ومنتجات أنيقة — تجربة تسوق بتصميم راقٍ وواضح.</p>
+        <a class="btn" href="#products">اكتشف المنتجات</a>
+      </div>
+    </section>
 
-body,
-nav,
-button,
-.hero p,
-.info p,
-footer {
-  font-family: 'Changa', sans-serif;
-}
+    <section id="products">
+      <div class="container">
+        <div class="section-head">
+          <h2>مختارات Shadow Empire</h2>
+          <p>اختر القسم واستعرض المنتجات المتاحة</p>
+        </div>
 
-.info h3,
-.section-title h2 {
-  font-family: 'Cairo', sans-serif;
-  font-weight: 700;
-  line-height: 1.7;
-}
+        <div class="filters" aria-label="تصفية المنتجات">
+          <button class="filter-btn active" data-filter="all">جميع المنتجات</button>
+          <button class="filter-btn" data-filter="phones">الهواتف</button>
+          <button class="filter-btn" data-filter="audio">السماعات</button>
+          <button class="filter-btn" data-filter="watches">الساعات</button>
+          <button class="filter-btn" data-filter="accessories">الإكسسوارات</button>
+          <button class="filter-btn" data-filter="luxury">الفخامة</button>
+        </div>
 
-/* تنسيق خانة السعر */
-.price {
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-  padding: 12px 14px;
-  background: #211b10;
-  border: 1px solid #8c713c;
-  border-radius: 7px;
-  color: #e2c477;
-  font-family: 'Cairo', sans-serif;
-  font-size: 21px;
-  font-weight: 800;
-  line-height: 1.6;
-  direction: rtl;
-}
+        <div class="grid" id="product-grid">
+          <article class="card" data-category="phones">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=85" alt="صورة توضيحية لهاتف ذكي"></div>
+            <div class="info">
+              <span class="category">APPLE • هاتف ذكي</span>
+              <h3>iPhone 18 Pro</h3>
+              <p>هاتف Apple من فئة Pro. حدّد السعة واللون والتوفر قبل تأكيد الطلب. الصورة توضيحية وليست صورة رسمية للموديل.</p>
+              <div class="price-box">
+                <span class="price-label">السعر الرسمي الابتدائي في السعودية</span>
+                <span class="price">5,699 <small>ر.س</small></span>
+                <span class="price-note">قد يتغير حسب السعة والعروض؛ تحقق من صفحة Apple الرسمية.</span>
+              </div>
+              <a class="btn" href="https://www.apple.com/sa-en-edu/shop/buy-iphone" target="_blank" rel="noopener">تحقق من السعر الرسمي</a>
+            </div>
+          </article>
 
-.note {
-  display: block;
-  margin-top: 8px;
-  color: #c5c0b5;
-  font-family: 'Changa', sans-serif;
-  font-size: 12px;
-  line-height: 1.8;
-}
+          <article class="card" data-category="phones">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=900&q=85" alt="صورة توضيحية لهاتف ذكي"></div>
+            <div class="info">
+              <span class="category">APPLE • هاتف ذكي</span>
+              <h3>iPhone Air</h3>
+              <p>تصميم نحيف من Apple. تأكد من السعة واللون والتوفر قبل اعتماد السعر. الصورة توضيحية وليست صورة رسمية للموديل.</p>
+              <div class="price-box">
+                <span class="price-label">السعر الرسمي الابتدائي في السعودية</span>
+                <span class="price">5,199 <small>ر.س</small></span>
+                <span class="price-note">السعر الابتدائي المنشور؛ تحقق من السعر الحالي في صفحة Apple.</span>
+              </div>
+              <a class="btn" href="https://www.apple.com/sa-en-edu/shop/buy-iphone" target="_blank" rel="noopener">تحقق من السعر الرسمي</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="phones">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=900&q=85" alt="صورة توضيحية لهاتف Samsung"></div>
+            <div class="info">
+              <span class="category">SAMSUNG • هاتف ذكي</span>
+              <h3>Samsung Galaxy S26+</h3>
+              <p>هاتف Galaxy بشاشة كبيرة. السعر يتغير حسب السعة واللون والعروض؛ الصورة توضيحية وليست صورة رسمية للموديل.</p>
+              <div class="price-box">
+                <span class="price-label">السعر المنشور لتكوين 512GB</span>
+                <span class="price">5,349 <small>ر.س</small></span>
+                <span class="price-note">السعر المعروض قد يتغير بالعروض؛ راجع متجر Samsung الرسمي.</span>
+              </div>
+              <a class="btn" href="https://www.samsung.com/sa_en/smartphones/galaxy-s/galaxy-s26-plus-sky-blue-512gb-sm-s947blbomea/buy/" target="_blank" rel="noopener">تحقق من السعر الرسمي</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="audio">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=85" alt="سماعات لاسلكية"></div>
+            <div class="info">
+              <span class="category">AUDIO • صوتيات</span>
+              <h3>سماعات لاسلكية</h3>
+              <p>خيارات للاستماع اليومي والعمل والتنقل. سيُحدّد السعر بعد اختيار الماركة والموديل.</p>
+              <div class="price-box">
+                <span class="price-label">السعر</span>
+                <span class="price">السعر عند التواصل</span>
+                <span class="price-note">لا يوجد سعر رسمي موحّد دون تحديد الموديل.</span>
+              </div>
+              <a class="btn" href="#delivery">تفاصيل التوصيل والطلب</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="watches">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85" alt="ساعة يد أنيقة"></div>
+            <div class="info">
+              <span class="category">WEARABLES • ساعات</span>
+              <h3>ساعات ذكية وعصرية</h3>
+              <p>تشكيلة ساعات حسب الماركة والمزايا والتوافق مع الهاتف.</p>
+              <div class="price-box">
+                <span class="price-label">السعر</span>
+                <span class="price">السعر عند التواصل</span>
+                <span class="price-note">يُحدّد بعد اختيار الماركة والموديل.</span>
+              </div>
+              <a class="btn" href="#delivery">تفاصيل التوصيل والطلب</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="accessories">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=85" alt="إكسسوارات وأجهزة تقنية"></div>
+            <div class="info">
+              <span class="category">ACCESSORIES • إكسسوارات</span>
+              <h3>إكسسوارات الهواتف</h3>
+              <p>أغطية حماية وحوامل وملحقات متنوعة. تأكد من توافق الملحق مع جهازك.</p>
+              <div class="price-box">
+                <span class="price-label">السعر</span>
+                <span class="price">السعر عند التواصل</span>
+                <span class="price-note">السعر حسب النوع والموديل.</span>
+              </div>
+              <a class="btn" href="#delivery">تفاصيل التوصيل والطلب</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="accessories">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1609592806596-b43bada2f7d5?auto=format&fit=crop&w=900&q=85" alt="ملحقات تقنية"></div>
+            <div class="info">
+              <span class="category">CHARGING • شحن</span>
+              <h3>شواحن وكوابل</h3>
+              <p>شواحن وكوابل لأجهزة مختلفة. تحقّق من القدرة ونوع المنفذ والتوافق قبل الشراء.</p>
+              <div class="price-box">
+                <span class="price-label">السعر</span>
+                <span class="price">السعر عند التواصل</span>
+                <span class="price-note">السعر حسب القدرة والماركة والموديل.</span>
+              </div>
+              <a class="btn" href="#delivery">تفاصيل التوصيل والطلب</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="luxury">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85" alt="حقيبة أنيقة"></div>
+            <div class="info">
+              <span class="category">LIFESTYLE • حقائب</span>
+              <h3>شنط أنيقة</h3>
+              <p>حقائب بتصاميم مختلفة. تُذكر العلامة التجارية فقط عند التأكد من أصالة المنتج.</p>
+              <div class="price-box">
+                <span class="price-label">السعر</span>
+                <span class="price">السعر عند التواصل</span>
+                <span class="price-note">يُحدّد حسب النوع والخامة والماركة.</span>
+              </div>
+              <a class="btn" href="#delivery">تفاصيل التوصيل والطلب</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="luxury">
+            <div class="photo"><img loading="lazy" src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=900&q=85" alt="محفظة جلدية"></div>
+            <div class="info">
+              <span class="category">LIFESTYLE • إكسسوارات</span>
+              <h3>محافظ وإكسسوارات فاخرة</h3>
+              <p>خيارات أنيقة للاستخدام اليومي والهدايا. تختلف الخامة والسعر حسب المنتج.</p>
+              <div class="price-box">
+                <span class="price-label">السعر</span>
+                <span class="price">السعر عند التواصل</span>
+                <span class="price-note">يُحدّد بعد اختيار المنتج.</span>
+              </div>
+              <a class="btn" href="#delivery">تفاصيل التوصيل والطلب</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="notice">
+          ملاحظة: أسعار الهواتف مرجعية من صفحات الشركات السعودية وقد تتغير. لا تمثل هذه الأسعار سعر بيع Shadow Empire. صور الهواتف في هذا النموذج توضيحية وليست صورًا رسمية مؤكدة للموديلات. يُرجى تأكيد السعر والتوفر والضمان والتوصيل قبل إتمام أي طلب.
+        </div>
+      </div>
+    </section>
+
+    <section class="delivery" id="delivery">
+      <div class="container">
+        <h2>التوصيل وطلب المنتجات</h2>
+        <p>للتأكد من السعر النهائي والتوفر والضمان وتكلفة التوصيل، يرجى التواصل معنا قبل تأكيد الطلب.</p>
+        <p>سيتم تفعيل رابط واتساب المباشر في المرحلة الأخيرة بعد الانتهاء من مراجعة المنتجات والتصميم.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="brand">SHADOW EMPIRE</span>
+      <div>الأناقة في كل اختيار</div>
+      <div>© Shadow Empire — الأسعار والتوفر قابلان للتغيير.</div>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".card");
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+        cards.forEach((card) => {
+          card.hidden = !(filter === "all" || card.dataset.category === filter);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
