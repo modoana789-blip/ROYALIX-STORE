@@ -2,176 +2,260 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0a0a">
-  <title>Shadow Empire | Luxury Collection</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #0a0a0a;
-      color: #f5f0e6;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 7%;
-      border-bottom: 1px solid #292217;
-    }
-    .logo {
-      color: #d8b56d;
-      font-size: 23px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    nav a {
-      color: #eee;
-      text-decoration: none;
-      margin-right: 20px;
-      font-size: 14px;
-    }
-    .hero {
-      min-height: 490px;
-      display: flex;
-      align-items: center;
-      padding: 65px 9%;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.15), #0a0a0a 95%),
-        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85') center/cover;
-    }
-    .hero-content { max-width: 520px; }
-    .eyebrow {
-      color: #d8b56d;
-      letter-spacing: 3px;
-      font-size: 12px;
-    }
-    h1 {
-      font-size: clamp(38px, 6vw, 68px);
-      line-height: 1.2;
-      margin: 20px 0;
-    }
-    h1 span { color: #d8b56d; }
-    .hero p { color: #c2bdb3; line-height: 1.9; }
-    .button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 15px 27px;
-      background: #d8b56d;
-      color: #111;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .section { padding: 60px 7%; }
-    .section-title { text-align: center; margin-bottom: 35px; }
-    .section-title h2 { font-size: 30px; }
-    .section-title p { color: #aaa; }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-    .product {
-      border: 1px solid #302719;
-      background: #111;
-      padding-bottom: 22px;
-    }
-    .product img {
-      width: 100%;
-      aspect-ratio: 4 / 4.3;
-      object-fit: cover;
-      display: block;
-    }
-    .product h3 { padding: 0 16px; }
-    .product p { color: #d8b56d; padding: 0 16px; }
-    .product a {
-      display: block;
-      text-align: center;
-      margin: 15px 16px 0;
-      padding: 12px;
-      border: 1px solid #d8b56d;
-      color: #d8b56d;
-      text-decoration: none;
-    }
-    .note {
-      text-align: center;
-      color: #aaa;
-      line-height: 1.9;
-    }
-    footer {
-      text-align: center;
-      padding: 28px;
-      border-top: 1px solid #302719;
-      color: #999;
-      font-size: 13px;
-    }
-    @media (max-width: 700px) {
-      header { padding: 18px 5%; }
-      nav a { margin-right: 9px; font-size: 12px; }
-      .hero { min-height: 420px; padding: 45px 7%; }
-      .products { grid-template-columns: 1fr; }
-      .section { padding: 45px 6%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shadow Empire | متجر الفخامة</title>
+<style>
+:root {
+  --gold: #d6b36a;
+  --black: #090909;
+  --panel: #151515;
+  --muted: #b9b4a8;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--black);
+  color: #fff;
+}
+header {
+  padding: 22px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid #3b3020;
+}
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+nav { display:flex; gap:18px; flex-wrap:wrap; }
+a { color: inherit; text-decoration: none; }
+nav a { color: #ddd; font-size: 14px; }
+.hero {
+  padding: 85px 7%;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, #40301a 0%, #17130d 38%, #090909 76%);
+}
+.hero h1 {
+  font-size: clamp(34px, 6vw, 62px);
+  margin: 0 0 18px;
+}
+.gold { color: var(--gold); }
+.hero p { color: #d0cbc0; line-height: 2; }
+.button {
+  display: inline-block;
+  padding: 13px 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  margin-top: 14px;
+  border-radius: 4px;
+}
+section { padding: 48px 6%; }
+.section-title { text-align:center; margin-bottom:30px; }
+.section-title h2 { color:var(--gold); }
+.filters {
+  display:flex; justify-content:center; gap:10px;
+  flex-wrap:wrap; margin-bottom:28px;
+}
+.filters button {
+  background:#151515; color:#eee; border:1px solid #51442e;
+  padding:10px 15px; cursor:pointer; border-radius:4px;
+}
+.filters button:hover { background:#302517; }
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card {
+  background:var(--panel);
+  border:1px solid #30291d;
+  border-radius:9px;
+  overflow:hidden;
+  transition:transform .2s,border-color .2s;
+}
+.card:hover { transform:translateY(-5px); border-color:var(--gold); }
+.card img { width:100%; height:210px; object-fit:cover; background:#222; }
+.info { padding:18px; }
+.info h3 { margin-top:0; }
+.info p { color:var(--muted); font-size:13px; line-height:1.9; }
+.price { color:var(--gold); font-weight:bold; font-size:18px; }
+.note { color:#999; font-size:11px; }
+.order {
+  display:block; text-align:center; padding:12px;
+  border:1px solid var(--gold); color:var(--gold);
+  margin-top:15px; border-radius:4px;
+}
+.order:hover { background:var(--gold); color:#111; }
+.delivery {
+  text-align:center; background:#17130d;
+  border-top:1px solid #49391e; border-bottom:1px solid #49391e;
+}
+footer { text-align:center; padding:28px; color:#aaa; font-size:13px; }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">SHADOW EMPIRE</div>
-    <nav>
-      <a href="#home">الرئيسية</a>
-      <a href="#collection">المجموعة</a>
-      <a href="#contact">تواصل معنا</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <div class="eyebrow">LUXURY • STYLE • DISTINCTION</div>
-        <h1>الفخامة تبدأ<br>من <span>اختيارك</span></h1>
-        <p>اكتشف مجموعة مختارة من المنتجات العصرية والإكسسوارات المميزة، بتجربة تسوق تجمع الأناقة والبساطة.</p>
-        <a class="button" href="#collection">اكتشف المجموعة</a>
+<header>
+  <div class="logo">SHADOW EMPIRE</div>
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#products">المنتجات</a>
+    <a href="#delivery">التوصيل</a>
+  </nav>
+</header>
+
+<div class="hero" id="home">
+  <h1>الفخامة تبدأ من <span class="gold">اختيارك</span></h1>
+  <p>
+    أحدث الهواتف والإلكترونيات والإكسسوارات الفاخرة<br>
+    اختيارات مميزة لعشاق الجودة والأناقة
+  </p>
+  <a class="button" href="#products">اكتشف المنتجات</a>
+</div>
+
+<section id="products">
+  <div class="section-title">
+    <h2>مجموعة Shadow Empire</h2>
+    <p>منتجات مختارة بطابع عصري وفاخر</p>
+  </div>
+
+  <div class="filters">
+    <button onclick="filterProducts('all')">جميع المنتجات</button>
+    <button onclick="filterProducts('phones')">الهواتف</button>
+    <button onclick="filterProducts('audio')">السماعات</button>
+    <button onclick="filterProducts('watches')">الساعات</button>
+    <button onclick="filterProducts('accessories')">الإكسسوارات</button>
+    <button onclick="filterProducts('luxury')">المنتجات الفاخرة</button>
+  </div>
+
+  <div class="products">
+
+    <article class="card" data-category="phones">
+      <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=700&q=80" alt="هاتف ذكي">
+      <div class="info">
+        <h3>iPhone 18 Pro</h3>
+        <p>هاتف من Apple. السعر يتغير حسب السعة واللون والتوفر.</p>
+        <div class="price">ابتداءً من 5,699 ر.س</div>
+        <div class="note">السعر المعلن في متجر Apple السعودية؛ تحقق من التوفر.</div>
+        <a class="order" href="https://www.apple.com/sa-ar/shop/buy-iphone">تفاصيل السعر الرسمي</a>
       </div>
-    </section>
+    </article>
 
-    <section class="section" id="collection">
-      <div class="section-title">
-        <div class="eyebrow">OUR COLLECTION</div>
-        <h2>اختيارات مميزة</h2>
-        <p>اكتشف مجموعتنا المختارة بعناية</p>
+    <article class="card" data-category="phones">
+      <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=700&q=80" alt="هاتف iPhone">
+      <div class="info">
+        <h3>iPhone Air</h3>
+        <p>تصميم نحيف وأنيق من Apple.</p>
+        <div class="price">ابتداءً من 5,199 ر.س</div>
+        <div class="note">السعر المعلن في متجر Apple السعودية.</div>
+        <a class="order" href="https://www.apple.com/sa-ar/shop/buy-iphone">تفاصيل السعر الرسمي</a>
       </div>
+    </article>
 
-      <div class="products">
-        <article class="product">
-          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80" alt="سماعات أنيقة">
-          <h3>سماعات عصرية</h3>
-          <p>أضف السعر بعد تحديد المنتج</p>
-          <a href="#contact">استفسر عن المنتج</a>
-        </article>
-        <article class="product">
-          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="ساعة يد">
-          <h3>ساعة بتصميم أنيق</h3>
-          <p>أضف السعر بعد تحديد المنتج</p>
-          <a href="#contact">استفسر عن المنتج</a>
-        </article>
-        <article class="product">
-          <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=700&q=80" alt="قطعة بتصميم عصري">
-          <h3>تصميم عصري</h3>
-          <p>أضف السعر بعد تحديد المنتج</p>
-          <a href="#contact">استفسر عن المنتج</a>
-        </article>
+    <article class="card" data-category="phones">
+      <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=700&q=80" alt="هاتف Samsung">
+      <div class="info">
+        <h3>Samsung Galaxy S26+</h3>
+        <p>هاتف ذكي بشاشة كبيرة وأداء متقدم.</p>
+        <div class="price">5,849 ر.س</div>
+        <div class="note">سعر رسمي لتكوين محدد بسعة 512GB؛ قد يختلف حسب النسخة.</div>
+        <a class="order" href="https://www.samsung.com/sa_en/smartphones/galaxy-s26/buy/">تفاصيل السعر الرسمي</a>
       </div>
-    </section>
+    </article>
 
-    <section class="section note" id="contact">
-      <div class="eyebrow">SHADOW EMPIRE</div>
-      <h2>تجربة تسوق بطابع مختلف</h2>
-      <p>قريبًا: تفاصيل التواصل والطلب وخيارات التوصيل.</p>
-    </section>
-  </main>
+    <article class="card" data-category="audio">
+      <img src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80" alt="سماعات لاسلكية">
+      <div class="info">
+        <h3>سماعات لاسلكية</h3>
+        <p>خيارات صوتية للاستخدام اليومي والعمل والتنقل.</p>
+        <div class="price">تواصل لمعرفة السعر</div>
+        <a class="order" href="#delivery">تفاصيل المنتج</a>
+      </div>
+    </article>
 
-  <footer>© 2026 Shadow Empire — جميع الحقوق محفوظة</footer>
+    <article class="card" data-category="watches">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="ساعة يد">
+      <div class="info">
+        <h3>ساعات ذكية وعصرية</h3>
+        <p>تصاميم متعددة تناسب العمل والرياضة والحياة اليومية.</p>
+        <div class="price">تواصل لمعرفة السعر</div>
+        <a class="order" href="#delivery">تفاصيل المنتج</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="accessories">
+      <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=700&q=80" alt="إكسسوارات تقنية">
+      <div class="info">
+        <h3>إكسسوارات الهواتف</h3>
+        <p>أغطية حماية وملحقات عملية بتصاميم متنوعة.</p>
+        <div class="price">تواصل لمعرفة السعر</div>
+        <a class="order" href="#delivery">تفاصيل المنتج</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="accessories">
+      <img src="https://images.unsplash.com/photo-1609592806596-b43bada2f7d5?auto=format&fit=crop&w=700&q=80" alt="شواحن وكوابل">
+      <div class="info">
+        <h3>شواحن وكوابل</h3>
+        <p>خيارات شحن وتوصيل تناسب الأجهزة المتوافقة.</p>
+        <div class="price">تواصل لمعرفة السعر</div>
+        <a class="order" href="#delivery">تفاصيل المنتج</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="luxury">
+      <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80" alt="حقيبة أنيقة">
+      <div class="info">
+        <h3>شنط فاخرة</h3>
+        <p>حقائب أنيقة لمختلف المناسبات. العلامة التجارية والأصالة حسب المنتج الفعلي.</p>
+        <div class="price">تواصل لمعرفة السعر</div>
+        <a class="order" href="#delivery">تفاصيل المنتج</a>
+      </div>
+    </article>
+
+    <article class="card" data-category="luxury">
+      <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=700&q=80" alt="محفظة جلدية">
+      <div class="info">
+        <h3>محافظ وإكسسوارات فاخرة</h3>
+        <p>قطع أنيقة للاستخدام اليومي والهدايا.</p>
+        <div class="price">تواصل لمعرفة السعر</div>
+        <a class="order" href="#delivery">تفاصيل المنتج</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="delivery" id="delivery">
+  <h2 class="gold">التوصيل وطلب المنتجات</h2>
+  <p>للتأكد من السعر والتوفر وتفاصيل التوصيل، يرجى التواصل معنا عبر واتساب.</p>
+  <p>سيتم تفعيل زر واتساب المباشر بعد الانتهاء من تجهيز المنتجات.</p>
+</section>
+
+<footer>
+  <div class="logo">SHADOW EMPIRE</div>
+  <p>الأناقة في كل اختيار</p>
+  <p>الأسعار والتوفر قابلان للتغيير حسب الموديل والمورد.</p>
+  <p>© Shadow Empire</p>
+</footer>
+
+<script>
+function filterProducts(category) {
+  document.querySelectorAll('.card').forEach(function(card) {
+    card.style.display =
+      category === 'all' || card.dataset.category === category
+        ? ''
+        : 'none';
+  });
+}
+</script>
 </body>
 </html>
