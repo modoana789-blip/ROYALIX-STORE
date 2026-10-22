@@ -57,7 +57,7 @@
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:24px}
     .section-title{font-family:'Cairo',sans-serif;font-size:clamp(23px,3vw,32px);margin:0;color:#f7f0df}
     .section-desc{color:var(--muted);font-size:13px;margin:5px 0 0}
-    .category-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .category-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
     .category-card{background:linear-gradient(145deg,#191919,#101010);border:1px solid #332a1d;border-radius:12px;padding:18px 10px;text-align:center;transition:.2s;min-height:124px}
     .category-card:hover,.category-card.active{border-color:var(--gold);background:linear-gradient(145deg,#282012,#12110e);transform:translateY(-2px)}
     .category-icon{font-size:28px;display:block;margin-bottom:7px;filter:grayscale(.15)}
@@ -73,8 +73,8 @@
     .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
     .product-card{background:var(--panel);border:1px solid #29241b;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:.22s;min-width:0}
     .product-card:hover{border-color:#8e7139;transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.22)}
-    .product-image{height:205px;background:#1b1b1b;position:relative;overflow:hidden}
-    .product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;opacity:.93}
+    .product-image{height:205px;background:#f7f7f7;position:relative;overflow:hidden}.image-fallback{display:grid;place-items:center;height:100%;background:linear-gradient(135deg,#242016,#111);color:#d9b568;font:800 20px Cairo,sans-serif}
+    .product-image img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s;padding:12px;background:#f7f7f7;opacity:1}
     .product-card:hover .product-image img{transform:scale(1.04)}
     .product-tag{position:absolute;top:12px;right:12px;background:#d9b568;color:#1a1409;padding:4px 9px;border-radius:4px;font-size:10px;font-weight:800}
     .fav-btn{position:absolute;top:10px;left:10px;width:34px;height:34px;border-radius:50%;border:1px solid #62502e;background:rgba(8,8,8,.78);color:#e7d4a4;font-size:18px}
@@ -90,7 +90,6 @@
     .product-actions{display:flex;gap:8px}
     .product-actions button{flex:1;padding:9px 8px;border-radius:6px;font-size:12px}
     .details-btn{background:transparent;color:#d9c99f;border:1px solid #55472e}
-    .compare-btn{background:#202020;border:1px solid #333;color:#c5c0b5}
     .empty{grid-column:1/-1;text-align:center;color:#aaa;padding:40px;border:1px dashed #473a25;border-radius:12px}
     .brand-strip{display:flex;justify-content:center;align-items:center;gap:clamp(18px,4vw,55px);flex-wrap:wrap;padding:26px;border-block:1px solid #282116;color:#aaa18f;font-family:'Cairo',sans-serif;font-weight:800;font-size:clamp(15px,2vw,22px);letter-spacing:1px}
     .brand-strip span:hover{color:var(--gold2)}
@@ -118,7 +117,6 @@
     .modal-close{position:absolute;top:10px;left:12px;background:none;border:0;color:#fff;font-size:24px}
     .modal p{color:#c1b9aa;font-size:13px}
     .modal .price-box{margin:15px 0}
-    .compare-count{font-size:12px;color:#c9b780}
     @media(max-width:980px){nav{gap:12px}.category-grid{grid-template-columns:repeat(3,1fr)}.products-grid{grid-template-columns:repeat(3,1fr)}.hero-grid{gap:20px}}
     @media(max-width:720px){.header-inner{flex-wrap:wrap;padding:12px 0}.header-inner nav{order:3;width:100%;overflow:auto;justify-content:flex-start;padding:4px 0 7px;white-space:nowrap}.brand-name{font-size:20px}.hero{padding:48px 0}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:245px;order:-1}.hero-orbit{width:235px}.hero-emblem .crown{font-size:48px}.hero-emblem strong{font-size:24px}.hero h1{font-size:39px}.products-grid{grid-template-columns:repeat(2,1fr);gap:11px}.product-image{height:165px}.product-info{padding:11px}.product-info h3{font-size:13px}.product-desc{font-size:11px}.feature-grid{grid-template-columns:1fr}.newsletter{align-items:flex-start;flex-direction:column;padding:22px}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
     @media(max-width:400px){.products-grid{grid-template-columns:1fr}.product-image{height:220px}.category-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr}.footer-grid>div:first-child{grid-column:auto}.hero-buttons .btn{width:100%}}
@@ -137,7 +135,7 @@
       </nav>
       <div class="header-actions">
         <button class="icon-btn" id="favoritesShortcut" aria-label="المفضلة">♡ <span id="favCount">0</span></button>
-        <button class="icon-btn" id="compareShortcut" aria-label="المقارنة">⇄ <span id="compareCount">0</span></button>
+        
       </div>
     </div>
   </header>
@@ -165,17 +163,17 @@
           <button class="category-card active" data-category="all"><span class="category-icon">✦</span><strong>كل المنتجات</strong><small>عرض الكل</small></button>
           <button class="category-card" data-category="phones"><span class="category-icon">▣</span><strong>الهواتف</strong><small>Phones</small></button>
           <button class="category-card" data-category="audio"><span class="category-icon">♫</span><strong>الصوتيات</strong><small>Audio</small></button>
-          <button class="category-card" data-category="watches"><span class="category-icon">◷</span><strong>الساعات</strong><small>Watches</small></button>
+          <button class="category-card" data-category="watches"><span class="category-icon">◷</span><strong>الساعات الذكية</strong><small>Watches</small></button>
           <button class="category-card" data-category="accessories"><span class="category-icon">⌁</span><strong>الإكسسوارات</strong><small>Accessories</small></button>
-          <button class="category-card" data-category="bags"><span class="category-icon">◇</span><strong>الحقائب</strong><small>Bags</small></button>
-          <button class="category-card" data-category="gaming"><span class="category-icon">⌘</span><strong>الألعاب والتقنية</strong><small>Gaming</small></button>
+          <button class="category-card" data-category="bags"><span class="category-icon">◇</span><strong>الحقائب الفاخرة</strong><small>Bags</small></button>
+          <button class="category-card" data-category="gaming"><span class="category-icon">⌘</span><strong>الألعاب</strong><small>Gaming</small></button>
         </div>
       </div>
     </section>
 
     <section class="section" id="products" style="padding-top:10px">
       <div class="container">
-        <div class="section-head"><div><div class="eyebrow">THE COLLECTION</div><h2 class="section-title">منتجات مختارة</h2><p class="section-desc">هذه بطاقات تجريبية لتجهيز شكل المتجر؛ الأسعار والتوفر تحتاج إلى تأكيد قبل البيع.</p></div><div class="compare-count" id="resultCount">6 منتجات تجريبية</div></div>
+        <div class="section-head"><div><div class="eyebrow">THE COLLECTION</div><h2 class="section-title">منتجات مختارة</h2><p class="section-desc">28 منتجًا من ماركات معروفة. الأسعار إرشادية بحسب عروض متاجر مرصودة وتتغير؛ تحقق من السعر والتوفر والضمان من المصدر قبل الطلب.</p></div><div class="compare-count" id="resultCount">المنتجات</div></div>
         <div class="toolbar">
           <div class="search-wrap"><span class="search-symbol">⌕</span><input id="searchInput" type="search" placeholder="ابحث باسم المنتج أو الماركة..." aria-label="البحث عن المنتجات"></div>
           <div class="filters">
@@ -199,20 +197,13 @@
         <div class="section-head"><div><div class="eyebrow">THE ROYALIX STANDARD</div><h2 class="section-title">تجربة أوضح، واختيار أذكى</h2><p class="section-desc">ميزات تساعد الزائر على استكشاف المنتجات قبل اتخاذ قرار الشراء.</p></div></div>
         <div class="feature-grid">
           <div class="feature"><div class="feature-icon">⌕</div><h3>بحث وفلترة سريعة</h3><p>ابحث باسم المنتج أو الماركة، أو صفِّ النتائج حسب التصنيف والسعر.</p></div>
-          <div class="feature"><div class="feature-icon">♡</div><h3>قائمة المفضلة</h3><p>احفظ المنتجات التي تعجبك أثناء تصفح هذه الصفحة. تُحفظ القائمة داخل جلسة الصفحة الحالية فقط.</p></div>
-          <div class="feature"><div class="feature-icon">⇄</div><h3>مقارنة المنتجات</h3><p>حدد المنتجات التي تريد مقارنتها. ستظهر تفاصيل المقارنة ضمن نافذة بسيطة.</p></div>
+          <div class="feature"><div class="feature-icon">♡</div><h3>قائمة المفضلة</h3><p>احفظ منتجاتك المفضلة وستبقى محفوظة على هذا الجهاز حتى بعد تحديث الصفحة.</p></div>
+          <div class="feature"><div class="feature-icon">✓</div><h3>مصادر واضحة</h3><p>تحقق من السعر والمواصفات والتوفر عبر رابط المصدر المرفق بكل منتج.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="section" style="padding-top:0">
-      <div class="container">
-        <div class="newsletter">
-          <div><h2>كن قريبًا من الجديد</h2><p>هذا نموذج واجهة تجريبي فقط؛ لن يرسل بريدك إلى أي جهة.</p></div>
-          <form class="newsletter-form" id="newsletterForm"><input type="email" id="emailInput" placeholder="بريدك الإلكتروني" aria-label="بريدك الإلكتروني" required><button class="btn btn-primary" type="submit">سجّل اهتمامك</button></form>
-        </div>
-      </div>
-    </section>
+
   </main>
 
   <footer>
@@ -232,24 +223,47 @@
   </div>
 
   <script>
-    // أسعار المنتجات أدناه أمثلة شكلية وليست أسعار بيع مؤكدة.
+    // الأسعار المرصودة من صفحات متاجر ومصادر سعودية؛ قد تتغير حسب العروض والتوفر.
     const products = [
-      {id:1,brand:"Apple",name:"هاتف ذكي — فئة رائدة",category:"phones",categoryAr:"الهواتف",price:3999,tag:"اختيار مميز",desc:"بطاقة تجريبية لهاتف رائد. أضف الموديل والسعة والمواصفات بعد التحقق.",specs:"الموديل والسعة والضمان: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=900&q=85"},
-      {id:2,brand:"Samsung",name:"هاتف ذكي — شاشة كبيرة",category:"phones",categoryAr:"الهواتف",price:3299,tag:"تقنية",desc:"بطاقة تجريبية لهاتف بشاشة كبيرة. المواصفات النهائية تحتاج إلى تأكيد.",specs:"الموديل والذاكرة والضمان: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=900&q=85"},
-      {id:3,brand:"Sony",name:"سماعات لاسلكية",category:"audio",categoryAr:"الصوتيات",price:749,tag:"صوت نقي",desc:"تصميم لاسلكي للاستماع اليومي. اسم الموديل والمزايا غير محددة بعد.",specs:"الموديل ومدة البطارية: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85"},
-      {id:4,brand:"Samsung",name:"ساعة ذكية",category:"watches",categoryAr:"الساعات",price:899,tag:"ذكي وأنيق",desc:"بطاقة تجريبية لساعة ذكية. تحقق من التوافق والمقاس قبل النشر.",specs:"الموديل والمقاس والتوافق: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85"},
-      {id:5,brand:"Anker",name:"شاحن سريع وإكسسوارات",category:"accessories",categoryAr:"الإكسسوارات",price:129,tag:"أساسيات",desc:"بطاقة إكسسوارات تجريبية. القدرة والمنافذ يجب أن تطابق المنتج الفعلي.",specs:"القدرة والمنافذ ومعايير السلامة: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=85"},
-      {id:6,brand:"Coach",name:"حقيبة أنيقة",category:"bags",categoryAr:"الحقائب",price:699,tag:"أناقة",desc:"بطاقة تجريبية لفئة الحقائب. لا يُعرض المنتج كأصلي إلا بعد التحقق من المصدر.",specs:"الموديل والخامة والأصالة: تُؤكّد من المورد.",image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85"},
-      {id:7,brand:"Logitech",name:"ملحقات ألعاب",category:"gaming",categoryAr:"الألعاب والتقنية",price:299,tag:"للاعبين",desc:"بطاقة تجريبية لملحق ألعاب. حدّد الموديل والتوافق قبل البيع.",specs:"الموديل والتوافق والضمان: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=85"},
-      {id:8,brand:"JBL",name:"سماعة محمولة",category:"audio",categoryAr:"الصوتيات",price:249,tag:"محمولة",desc:"بطاقة تجريبية لسماعة محمولة. لا تعتمد السعر أو المواصفات قبل التحقق.",specs:"الموديل ومقاومة الماء والبطارية: تُحدّد لاحقًا.",image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=900&q=85"}
+      {id:1,brand:"Apple",name:"iPhone 17 — 256GB",category:"phones",categoryAr:"الهواتف",price:4299,tag:"Apple",desc:"شاشة Super Retina XDR مقاس 6.3 بوصة، شريحة A19، كاميرا Fusion مزدوجة 48MP.",specs:"السعة: 256GB · الشاشة: 6.3 بوصة · الكاميرا الخلفية: 48MP رئيسية + 48MP واسعة جدًا · المصدر: Apple السعودية.",image:"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-lavender-202509_GEO_US?wid=1200&hei=1200&fmt=png-alpha",source:"https://www.apple.com/sa-en/shop/buy-iphone/iphone-17",sourceLabel:"Apple السعودية — السعر الرسمي"},
+      {id:2,brand:"Samsung",name:"Galaxy S25 — 256GB / 12GB",category:"phones",categoryAr:"الهواتف",price:2299,tag:"Samsung",desc:"شاشة Dynamic AMOLED 2X مقاس 6.2 بوصة بمعدل تحديث يصل إلى 120Hz ومعالج Snapdragon 8 Elite for Galaxy.",specs:"السعة: 256GB · الذاكرة: 12GB RAM · الشاشة: 6.2 بوصة · البطارية: 4000mAh · المصدر: Samsung السعودية.",image:"https://pb.telo24.ee/api/files/vkk5rigdvft8lyf/cwbt2dces9nnqpl/samsung_galaxy_s25_silver_shadow_jz47l95s15.png",source:"https://www.samsung.com/sa_en/smartphones/galaxy-s25/buy/?modelCode=SM-S931BLBOMEA",sourceLabel:"Samsung السعودية — تحقق من السعر"},
+      {id:3,brand:"Sony",name:"WH-1000XM5 — سماعات عزل ضوضاء",category:"audio",categoryAr:"الصوتيات",price:995,tag:"Sony",desc:"سماعات فوق الأذن مع عزل ضوضاء نشط واتصال Bluetooth متعدد الأجهزة.",specs:"عمر البطارية: حتى 30 ساعة مع عزل الضوضاء · Bluetooth 5.2 · وزن نحو 250 غرامًا · المصدر: مواصفات Sony.",image:"https://pcdiga-prod.eu.saleor.cloud/media/thumbnails/products/P044643_4402f3bd_thumbnail_1024.jpg",source:"https://www.amazon.sa/-/en/noise-cancelling/s?k=noise+cancelling",sourceLabel:"Amazon السعودية — سعر مرصود"},
+      {id:4,brand:"JBL",name:"Tune 770NC — سماعات لاسلكية",category:"audio",categoryAr:"الصوتيات",price:295,tag:"JBL",desc:"سماعات رأس لاسلكية مع عزل ضوضاء تكيفي وصوت JBL Pure Bass.",specs:"Bluetooth 5.3 · عمر تشغيل يصل إلى 70 ساعة · اتصال متعدد الأجهزة · عزل ضوضاء تكيفي · المصدر: JBL.",image:"https://www.maccenter.vn/Headphone/JBL-Tune770NC-Black-A.jpg",source:"https://www.amazon.sa/-/en/noise-cancelling/s?k=noise+cancelling",sourceLabel:"Amazon السعودية — سعر مرصود"},
+      {id:5,brand:"Anker Soundcore",name:"Liberty 4 NC — سماعات أذن",category:"audio",categoryAr:"الصوتيات",price:229,tag:"Anker",desc:"سماعات أذن لاسلكية مع عزل ضوضاء تكيفي وصوت عالي الدقة.",specs:"عزل ضوضاء تكيفي · مشغلات 11mm · Bluetooth 5.3 · حتى 10 ساعات تشغيل للسماعات و50 ساعة مع العلبة وفق الشركة · المصدر: Soundcore.",image:"https://www.phoneplacekenya.com/wp-content/uploads/2024/06/Anker-Liberty-4-NC.jpg",source:"https://www.amazon.sa/-/en/noise-cancelling/s?k=noise+cancelling",sourceLabel:"Amazon السعودية — سعر مرصود"},
+      {id:6,brand:"Apple",name:"AirPods 4 — سماعات لاسلكية",category:"accessories",categoryAr:"الإكسسوارات",price:479,tag:"Apple",desc:"سماعات بتصميم مفتوح وشريحة H2 وصوت مكاني مخصص.",specs:"حتى 5 ساعات استماع بالشحنة الواحدة وحتى 30 ساعة مع علبة الشحن · مقاومة للغبار والعرق والماء IP54 · USB‑C · المصدر: صفحة مواصفات Apple.",image:"https://shop.switch.com.my/cdn/shop/files/AirPods_4_PDP_Image_Position_2__GBEN_d0b0dac5-549c-4d8c-9339-3699a79a9de9.jpg?v=1726225568&width=1445",source:"https://tawveeri.com/en/categories/audio",sourceLabel:"مقارنة أسعار سعودية — سعر مرصود"},
+      {id:7,brand:"Samsung",name:"Galaxy Buds3 FE — سماعات أذن",category:"audio",categoryAr:"الصوتيات",price:299,tag:"Samsung",desc:"سماعات أذن لاسلكية من Samsung للاستخدام اليومي.",specs:"سماعات TWS · تحقق من التوافق واللون والضمان الإقليمي من صفحة المتجر قبل الشراء · المصدر: متجر STC.",image:"https://cdn.cs.1worldsync.com/28/fa/28fae632-e52e-4d15-906a-3a744d609437.jpg",source:"https://www.stc.com.sa/content/stc-public-store/sa/ar/public-store-landing-page.html",sourceLabel:"متجر STC — تحقق من السعر"},
+      {id:8,brand:"JBL",name:"Go 4 — سماعة بلوتوث محمولة",category:"audio",categoryAr:"الصوتيات",price:149,tag:"JBL",desc:"سماعة بلوتوث صغيرة محمولة للاستخدام اليومي.",specs:"صوت JBL Pro · مقاومة للماء والغبار IP67 · حتى 7 ساعات تشغيل وفق الشركة · المصدر: مقارنة أسعار سعودية.",image:"https://kr.jbl.com/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwe3e29189/JBL_GO_4_FRONT_BLACK_48189_x1.png",source:"https://tawveeri.com/en/categories/audio",sourceLabel:"مقارنة أسعار سعودية — سعر مرصود"},
+      {id:9,brand:"Apple",name:"iPhone 17 Pro — 256GB",category:"phones",categoryAr:"الهواتف",price:4599,tag:"Apple",desc:"هاتف Pro بشاشة OLED ونظام كاميرات متقدم وأداء قوي.",specs:"سعة 256GB · شاشة Super Retina XDR · شريحة A19 Pro · نظام كاميرات Pro · السعر المرصود يتغير حسب المتجر واللون.",image:"https://www.pbtech.co.nz/imgprod/M/P/MPHAPP817212.jpg?h=3366490703",source:"https://sa.asaary.com/cl/smartphones/apple",sourceLabel:"مقارنة أسعار Apple في السعودية"},
+      {id:10,brand:"Apple",name:"iPhone 16 — 128GB",category:"phones",categoryAr:"الهواتف",price:3049,tag:"Apple",desc:"خيار عملي من Apple بتصميم حديث وكاميرا Fusion.",specs:"سعة 128GB · شاشة OLED 6.1 بوصة · شريحة A18 · كاميرا رئيسية 48MP · تحقق من السعة والضمان الإقليمي.",image:"https://res.cloudinary.com/telia-pim/image/upload/v1725969455/pood/apple/nutitelefonid/iphone-16/sinine/128-gb/myec3hxa/apple-iphone-16-nutitelefon-sinine-eest-tagant-koos.png",source:"https://sa.asaary.com/cl/smartphones/apple",sourceLabel:"مقارنة أسعار Apple في السعودية"},
+      {id:11,brand:"Samsung",name:"Galaxy S25 Ultra — 256GB",category:"phones",categoryAr:"الهواتف",price:4499,tag:"Samsung",desc:"هاتف رائد بشاشة كبيرة وقلم S Pen وكاميرات متعددة.",specs:"سعة 256GB · ذاكرة 12GB · شاشة Dynamic AMOLED 2X مقاس 6.9 بوصة · كاميرا رئيسية 200MP · بطارية 5000mAh.",image:"https://smartmania.cz/wp-content/uploads/2025/01/Samsung-Galaxy-S25-Ultra-katalog-1000x1000.png",source:"https://www.samsung.com/sa_en/smartphones/galaxy-s25-ultra/",sourceLabel:"Samsung السعودية — تحقق من السعر"},
+      {id:12,brand:"Samsung",name:"Galaxy A56 5G — 128GB",category:"phones",categoryAr:"الهواتف",price:1199,tag:"Samsung",desc:"هاتف متوسط مناسب للاستخدام اليومي مع شاشة كبيرة واتصال 5G.",specs:"سعة 128GB · ذاكرة 8GB · شاشة Super AMOLED 6.7 بوصة · كاميرا رئيسية 50MP · مقاومة IP67.",image:"https://www.samsung-online.com.ua/uploads/shop/products/large/8f83d93860572ccfc20de6f81911de66.jpg",source:"https://www.samsung.com/sa_en/smartphones/galaxy-a/galaxy-a56-5g/",sourceLabel:"Samsung السعودية — تحقق من السعر"},
+      {id:13,brand:"Apple",name:"AirPods Pro 3",category:"audio",categoryAr:"الصوتيات",price:849,tag:"Apple",desc:"سماعات أذن لاسلكية بعزل ضوضاء نشط وميزات مخصصة لأجهزة Apple.",specs:"إلغاء ضوضاء نشط · صوت مكاني · علبة شحن USB-C · راجع التوافق والضمان الإقليمي.",image:"https://s3.us-east-1.amazonaws.com/product-image-bucket-nz-prod-us/462741-Product-1-I-638930627404154176.jpg",source:"https://tawveeri.com/en/categories/audio",sourceLabel:"مقارنة أسعار الصوتيات في السعودية"},
+      {id:14,brand:"Samsung",name:"Galaxy Buds4 Pro",category:"audio",categoryAr:"الصوتيات",price:849,tag:"Samsung",desc:"سماعات لاسلكية بصوت Hi-Fi وتصميم معدني مميز.",specs:"مكبرات ثنائية الاتجاه · صوت Hi-Fi · إلغاء ضوضاء نشط · ميزات Galaxy AI على الأجهزة المتوافقة.",image:"https://ssr.col.movistar.es/api/v3/get-pic/content/dam/movistar/estaticos/imagenes/dispositivos/samsung/accesorios/galaxy-bud4-pro-blanco-02.png?oe=png&v=mr1p3eao",source:"https://www.samsung.com/ps/audio-sound/galaxy-buds4-pro/buy/",sourceLabel:"Samsung — المواصفات والتوفر"},
+      {id:15,brand:"Sony",name:"WH-CH720N — سماعات عزل ضوضاء",category:"audio",categoryAr:"الصوتيات",price:317,tag:"Sony",desc:"سماعات رأس خفيفة مع عزل ضوضاء نشط ووضع الصوت المحيط.",specs:"عزل ضوضاء نشط · معالج V1 · وزن نحو 192 غرامًا · بطارية تصل إلى 35 ساعة وفق Sony.",image:"https://img.ep-cdn.com/i/500/500/le/lexjzfcrpmhgyiwqastk/sony-slusalice-whch720nb-ce7-cene.jpg",source:"https://priceteq.com/sa/audio",sourceLabel:"PriceTeq — أسعار صوتيات السعودية"},
+      {id:16,brand:"JBL",name:"Flip 7 — سماعة محمولة",category:"audio",categoryAr:"الصوتيات",price:469,tag:"JBL",desc:"سماعة محمولة بصوت قوي وتصميم مناسب للرحلات والاستخدام الخارجي.",specs:"Bluetooth · مقاومة الماء والغبار وفق تصنيف المنتج · تشغيل محمول · تحقق من اللون والضمان قبل الطلب.",image:"https://www-konga-com-res.cloudinary.com/image/upload/f_auto%2Cfl_lossy%2Cdpr_auto%2Cq_auto%2Cw_3840/media/catalog/product/D/N/57289_1756662860.jpg",source:"https://tawveeri.com/en/categories/audio",sourceLabel:"مقارنة أسعار الصوتيات في السعودية"},
+      {id:17,brand:"Anker Soundcore",name:"Space One — سماعات لاسلكية",category:"audio",categoryAr:"الصوتيات",price:297,tag:"Anker",desc:"سماعات فوق الأذن مع عزل ضوضاء وصوت عالي الدقة عبر LDAC على الأجهزة المتوافقة.",specs:"عزل ضوضاء تكيفي · LDAC · اتصال متعدد الأجهزة · حتى 40 ساعة مع ANC حسب الشركة.",image:"https://m.media-amazon.com/images/I/51fuWXGITfL.jpg",source:"https://www.amazon.sa/-/en/noise-cancelling/s?k=noise+cancelling",sourceLabel:"Amazon السعودية — تحقق من السعر"},
+      {id:18,brand:"Apple",name:"Apple Watch Series 11 — 42mm GPS",category:"watches",categoryAr:"الساعات الذكية",price:1799,tag:"Apple",desc:"ساعة ذكية لمتابعة النشاط والصحة والإشعارات اليومية.",specs:"هيكل ألمنيوم · شاشة Retina تعمل دائمًا · GPS · مقاومة للماء حتى 50 مترًا وفق Apple · تتطلب iPhone متوافقًا.",image:"https://www.switch.sg/cdn/shop/files/IMG-18079955_m_jpeg_1_2c5492f3-d18f-4be6-bc56-e3e936776eff.jpg?v=1757490035",source:"https://shop.sa.zain.com/ar/devices/smartwatches?disable-footer=false&disable-header=false",sourceLabel:"Zain السعودية — سعر مرصود حسب الإصدار"},
+      {id:19,brand:"Samsung",name:"Galaxy Watch 8 — 44mm",category:"watches",categoryAr:"الساعات الذكية",price:1199,tag:"Samsung",desc:"ساعة ذكية بشاشة AMOLED وميزات تتبع النوم والنشاط.",specs:"مقاس 44mm · شاشة Super AMOLED · GPS · مقاومة ماء وغبار حسب تصنيف Samsung · بعض الميزات تتطلب هاتف Galaxy.",image:"https://thumb.pccomponentes.com/w-530-530/articles/1093/10935373/1773-smartwatch-samsung-galaxy-watch-8-lte-amoled-44mm-salud-gps-y-one-ui-review.jpg",source:"https://www.extra.com/en-sa/mobiles-tablets/wearable/smart-watches/samsung-galaxy-watch-8-44mm-silver/p/100461133",sourceLabel:"eXtra السعودية — السعر المعروض"},
+      {id:20,brand:"Garmin",name:"Venu 3 — ساعة رياضية ذكية",category:"watches",categoryAr:"الساعات الذكية",price:1399,tag:"Garmin",desc:"ساعة رياضية مع شاشة AMOLED وميزات تتبع الصحة والتمارين.",specs:"شاشة AMOLED · GPS · تتبع نبض القلب والنوم والتمارين · مدة البطارية تختلف حسب الاستخدام.",image:"https://pulsometrs.lv/wp-content/uploads/2024/10/Garmin-Venu-3-010-02784-00-pulsometrslv.jpg",source:"https://www.garmin.com/en-US/p/873008",sourceLabel:"Garmin — المواصفات الرسمية"},
+      {id:21,brand:"Anker",name:"737 Power Bank — 24,000mAh",category:"accessories",categoryAr:"الإكسسوارات",price:399,tag:"Anker",desc:"بطارية متنقلة عالية السعة مع شاشة رقمية ومخارج شحن متعددة.",specs:"سعة 24,000mAh · شحن ثنائي الاتجاه حتى 140W حسب الشركة · شاشة رقمية · تحقق من متطلبات الشحن الجوي.",image:"https://content.abt.com/image.php/95961c5a55c0abdb13f9faecf7466b05?canvas=&ck=2&height=750&image=%2Fimages%2Fproducts%2FBDP_Images%2Fanker-powerbank-A1289011-front-angle.jpg&width=750",source:"https://www.amazon.sa/s?k=Anker+737+Power+Bank",sourceLabel:"Amazon السعودية — تحقق من السعر"},
+      {id:22,brand:"UGREEN",name:"Nexode 100W GaN — شاحن متعدد المنافذ",category:"accessories",categoryAr:"الإكسسوارات",price:299,tag:"UGREEN",desc:"شاحن GaN مدمج لشحن أجهزة متوافقة عبر منافذ متعددة.",specs:"قدرة قصوى معلنة 100W · منافذ USB-C وUSB-A بحسب الإصدار · القدرة الفعلية تتوزع حسب الأجهزة المتصلة.",image:"https://ixbt.online/live/images/original/00/28/11/2024/10/27/88a61d6102.jpg",source:"https://www.amazon.sa/s?k=UGREEN+Nexode+100W",sourceLabel:"Amazon السعودية — تحقق من الإصدار والسعر"},
+      {id:23,brand:"Apple",name:"AirTag — عبوة 4 قطع",category:"accessories",categoryAr:"الإكسسوارات",price:379,tag:"Apple",desc:"أجهزة تتبع صغيرة للأغراض الشخصية ضمن شبكة Find My.",specs:"عبوة 4 قطع · بطارية CR2032 قابلة للاستبدال · تعمل مع شبكة Apple Find My والأجهزة المتوافقة.",image:"https://www.switch.sg/cdn/shop/files/AirTag_PDP_Image_Position-3__WWEN_424b9a25-2cd4-4592-aae3-1df5cce8d747.jpg?v=1736274166&width=1445",source:"https://www.apple.com/sa-ar/airtag/",sourceLabel:"Apple السعودية — المواصفات"},
+      {id:24,brand:"Samsung",name:"T7 Shield SSD — 1TB",category:"accessories",categoryAr:"الإكسسوارات",price:449,tag:"Samsung",desc:"وحدة تخزين SSD محمولة للنسخ الاحتياطي ونقل الملفات.",specs:"سعة 1TB · واجهة USB 3.2 Gen 2 · تصميم مقاوم للصدمات والماء والغبار وفق تصنيف المنتج.",image:"https://images.samsung.com/is/image/samsung/p6pim/levant/mu-pe1t0s-ww/gallery/levant-portable-ssd-t7-shield-mu-pe1t0s-ww-531813487?$650_519_PNG$",source:"https://www.samsung.com/sa/memory-storage/portable-ssd/t7-shield-1tb-black-mu-pe1t0s-ww/",sourceLabel:"Samsung — المواصفات الرسمية"},
+      {id:25,brand:"Coach",name:"Tabby 26 — حقيبة كتف جلدية",category:"bags",categoryAr:"الحقائب الفاخرة",price:1699,tag:"Coach",desc:"حقيبة كتف بتصميم أنيق ومشبك C مميز من Coach.",specs:"موديل Tabby 26 · تصميم كتف مع حزام قابل للتعديل بحسب الإصدار · تحقق من الخامة واللون والأصالة وسياسة الإرجاع.",image:"https://cdnc.lystit.com/photos/mybag/7f0a0b6d/coach--Tabby-26-Shoulder-Bag.jpeg",source:"https://www.coach.com/shop/women/handbags",sourceLabel:"Coach — مجموعة الحقائب الرسمية"},
+      {id:26,brand:"Michael Kors",name:"Jet Set — حقيبة كروس بودي",category:"bags",categoryAr:"الحقائب الفاخرة",price:899,tag:"Michael Kors",desc:"حقيبة كروس بودي عملية من مجموعة Jet Set للاستخدام اليومي.",specs:"حقيبة كتف/كروس بودي · جيوب داخلية بحسب الإصدار · السعر يتغير حسب الخامة واللون والمقاس.",image:"https://www.lussocitta.com/cdn/shop/files/lussocitta-mk-35T8GTTC9L-0001_1.jpg?v=1730179266",source:"https://www.michaelkors.com/handbags/",sourceLabel:"Michael Kors — مجموعة الحقائب الرسمية"},
+      {id:27,brand:"Logitech G",name:"G502 X — ماوس ألعاب سلكي",category:"gaming",categoryAr:"الألعاب",price:299,tag:"Logitech G",desc:"ماوس ألعاب قابل للتخصيص مع أزرار إضافية ومستشعر دقيق.",specs:"مفاتيح LIGHTFORCE · مستشعر HERO 25K · أزرار قابلة للبرمجة · إصدار سلكي.",image:"https://www.nfm.com/dw/image/v2/BDFM_PRD/on/demandware.static/-/Sites-nfm-master-catalog/default/dwaf57153e/images/063/87/63871297-2.jpg?sh=1000&sm=fit&sw=1000",source:"https://www.logitechg.com/en-us/products/gaming-mice/g502-x-wired.html",sourceLabel:"Logitech G — المواصفات الرسمية"},
+      {id:28,brand:"Sony PlayStation",name:"DualSense — يد تحكم لاسلكية",category:"gaming",categoryAr:"الألعاب",price:299,tag:"PlayStation",desc:"يد تحكم لاسلكية لأجهزة PlayStation 5 مع استجابة لمسية ومحفزات تكيفية.",specs:"اهتزاز لمسي · محفزات تكيفية · ميكروفون مدمج · متوافقة مع PS5.",image:"https://puntoscolombia.vtexassets.com/arquivos/ids/33197307/711719574293.jpg?v=639172231093470000",source:"https://www.playstation.com/en-us/accessories/dualsense-wireless-controller/",sourceLabel:"PlayStation — المواصفات الرسمية"}
     ];
-    let selectedCategory="all", favorites=new Set(), compared=new Set();
+    let selectedCategory="all", favorites=new Set();
+    try { favorites = new Set(JSON.parse(localStorage.getItem("royalix-favorites") || "[]").map(Number)); } catch (_) { favorites = new Set(); }
+    let favoritesOnly=false;
     const grid=document.getElementById("productsGrid"), searchInput=document.getElementById("searchInput"), brandFilter=document.getElementById("brandFilter"), sortFilter=document.getElementById("sortFilter");
-    const money=n=>new Intl.NumberFormat("ar-SA",{maximumFractionDigits:0}).format(n)+" ر.س";
+    const money=n=>new Intl.NumberFormat("ar-SA",{maximumFractionDigits:0}).format(n)+" ﷼";
     function toast(message){const el=document.getElementById("toast");el.textContent=message;el.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display="none",2600)}
-    function updateCounts(){document.getElementById("favCount").textContent=favorites.size;document.getElementById("compareCount").textContent=compared.size;document.getElementById("resultCount").textContent=`${getVisibleProducts().length} منتجات`}
+    function saveFavorites(){try{localStorage.setItem("royalix-favorites",JSON.stringify([...favorites]));}catch(_){}}
+    function updateCounts(){document.getElementById("favCount").textContent=favorites.size;document.getElementById("resultCount").textContent=`${getVisibleProducts().length} منتجات`}
     function getVisibleProducts(){
-      let list=products.filter(p=>(selectedCategory==="all"||p.category===selectedCategory)&&(brandFilter.value==="all"||p.brand===brandFilter.value));
+      let list=products.filter(p=>(selectedCategory==="all"||p.category===selectedCategory)&&(brandFilter.value==="all"||p.brand===brandFilter.value)&&(!favoritesOnly||favorites.has(p.id)));
       const q=searchInput.value.trim().toLowerCase();
       if(q) list=list.filter(p=>(p.name+" "+p.brand+" "+p.categoryAr+" "+p.desc).toLowerCase().includes(q));
       if(sortFilter.value==="priceAsc")list.sort((a,b)=>a.price-b.price);
@@ -259,30 +273,27 @@
     }
     function render(){
       const list=getVisibleProducts();grid.innerHTML="";
-      if(!list.length){grid.innerHTML='<div class="empty">لا توجد منتجات مطابقة. جرّب كلمة بحث أو تصنيفًا آخر.</div>';updateCounts();return}
+      if(!list.length){grid.innerHTML=`<div class="empty">${favoritesOnly?"لا توجد منتجات محفوظة في المفضلة بعد.":"لا توجد منتجات مطابقة. جرّب كلمة بحث أو تصنيفًا آخر."}</div>`;updateCounts();return}
       list.forEach(p=>{
         const card=document.createElement("article");card.className="product-card";
-        card.innerHTML=`<div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#242016,#111)';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:grid;place-items:center;height:100%;color:#d9b568;font-size:42px&quot;>✦</div>')"><span class="product-tag">${p.tag}</span><button class="fav-btn ${favorites.has(p.id)?"on":""}" data-fav="${p.id}" aria-label="إضافة إلى المفضلة">${favorites.has(p.id)?"♥":"♡"}</button></div>
-        <div class="product-info"><div class="product-brand">${p.brand} · ${p.categoryAr}</div><h3>${p.name}</h3><p class="product-desc">${p.desc}</p><div class="product-bottom"><div class="price-box"><span>${money(p.price)}</span><small>سعر تجريبي</small></div><div class="product-note">السعر والمواصفات غير معتمدين للبيع بعد</div><div class="product-actions"><button class="details-btn" data-details="${p.id}">التفاصيل</button><button class="compare-btn" data-compare="${p.id}">${compared.has(p.id)?"✓ تمت الإضافة":"مقارنة ⇄"}</button></div></div></div>`;
+        card.innerHTML=`<div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="product-tag">${p.tag}</span><button class="fav-btn ${favorites.has(p.id)?"on":""}" data-fav="${p.id}" aria-label="${favorites.has(p.id)?"إزالة من المفضلة":"إضافة إلى المفضلة"}">${favorites.has(p.id)?"♥":"♡"}</button></div>
+        <div class="product-info"><div class="product-brand">${p.brand} · ${p.categoryAr}</div><h3>${p.name}</h3><p class="product-desc">${p.desc}</p><div class="product-bottom"><div class="price-box"><span>${money(p.price)}</span></div><div class="product-note">قد يتغير السعر حسب العرض والتوفر</div><div class="product-actions"><button class="details-btn" data-details="${p.id}">المواصفات ومصدر السعر</button></div></div></div>`;
+        const productImg=card.querySelector("img");productImg.addEventListener("error",()=>{productImg.style.display="none";const fallback=document.createElement("div");fallback.className="image-fallback";fallback.textContent=p.brand + " · " + p.name;productImg.parentElement.insertBefore(fallback,productImg.nextSibling);},{once:true});
         grid.appendChild(card);
       });
       updateCounts();
     }
     function fillBrands(){[...new Set(products.map(p=>p.brand))].sort().forEach(b=>{const o=document.createElement("option");o.value=b;o.textContent=b;brandFilter.appendChild(o)})}
-    function showDetails(id){const p=products.find(x=>x.id===id);document.getElementById("modalContent").innerHTML=`<div class="eyebrow">${p.brand} · ${p.categoryAr}</div><h2 id="modalTitle">${p.name}</h2><p>${p.desc}</p><p>${p.specs}</p><div class="price-box">${money(p.price)} <small>سعر تجريبي غير معتمد</small></div><p>قبل نشر هذا المنتج للبيع، تأكد من اسم الموديل الدقيق، الأصالة، السعر، المخزون، الضمان، الشحن وسياسة الإرجاع.</p>`;document.getElementById("modalBackdrop").style.display="grid"}
-    function showCompare(){if(!compared.size){toast("أضف منتجًا واحدًا على الأقل للمقارنة.");return}const items=products.filter(p=>compared.has(p.id));document.getElementById("modalContent").innerHTML=`<div class="eyebrow">PRODUCT COMPARISON</div><h2 id="modalTitle">مقارنة المنتجات</h2>${items.map(p=>`<div style="border-top:1px solid #332a1d;padding:12px 0"><strong>${p.name}</strong><p style="margin:4px 0;color:#b9b1a2;font-size:12px">الماركة: ${p.brand} · التصنيف: ${p.categoryAr}</p><div class="price-box">${money(p.price)} <small>سعر تجريبي</small></div><p style="font-size:12px">${p.specs}</p></div>`).join("")}<p>الأسعار والمواصفات أعلاه تجريبية وليست عرضًا للبيع.</p>`;document.getElementById("modalBackdrop").style.display="grid"}
+    function showDetails(id){const p=products.find(x=>x.id===id);document.getElementById("modalContent").innerHTML=`<div class="eyebrow">${p.brand} · ${p.categoryAr}</div><h2 id="modalTitle">${p.name}</h2><p>${p.desc}</p><p>${p.specs}</p><div class="price-box">${money(p.price)}</div><p style="color:#bdb3a0;font-size:12px">السعر المرصود إرشادي وقد يتغير؛ تحقق من السعر النهائي والتوفر والضمان والشحن قبل الطلب.</p><p><a class="btn btn-primary" href="${p.source}" target="_blank" rel="noopener noreferrer">${p.sourceLabel} ↗</a></p>`;document.getElementById("modalBackdrop").style.display="grid"}
     document.addEventListener("click",e=>{
-      const cat=e.target.closest("[data-category]");if(cat){selectedCategory=cat.dataset.category;document.querySelectorAll(".category-card").forEach(c=>c.classList.toggle("active",c===cat));render();document.getElementById("products").scrollIntoView({behavior:"smooth"});return}
-      const fav=e.target.closest("[data-fav]");if(fav){const id=Number(fav.dataset.fav);favorites.has(id)?favorites.delete(id):favorites.add(id);render();toast(favorites.has(id)?"أُضيف المنتج إلى المفضلة":"أُزيل المنتج من المفضلة");return}
-      const cmp=e.target.closest("[data-compare]");if(cmp){const id=Number(cmp.dataset.compare);if(compared.has(id))compared.delete(id);else if(compared.size>=3){toast("يمكنك مقارنة 3 منتجات كحد أقصى.");return}else compared.add(id);render();toast(compared.has(id)?"أُضيف المنتج للمقارنة":"أُزيل المنتج من المقارنة");return}
+      const cat=e.target.closest("[data-category]");if(cat){favoritesOnly=false;selectedCategory=cat.dataset.category;document.querySelectorAll(".category-card").forEach(c=>c.classList.toggle("active",c===cat));render();document.getElementById("products").scrollIntoView({behavior:"smooth"});return}
+      const fav=e.target.closest("[data-fav]");if(fav){const id=Number(fav.dataset.fav);if(favorites.has(id))favorites.delete(id);else favorites.add(id);saveFavorites();render();toast(favorites.has(id)?"أُضيف المنتج إلى المفضلة":"أُزيل المنتج من المفضلة");return}
       const det=e.target.closest("[data-details]");if(det){showDetails(Number(det.dataset.details));return}
     });
     searchInput.addEventListener("input",render);brandFilter.addEventListener("change",render);sortFilter.addEventListener("change",render);
-    document.getElementById("favoritesShortcut").addEventListener("click",()=>{selectedCategory="all";document.querySelectorAll(".category-card").forEach(c=>c.classList.toggle("active",c.dataset.category==="all"));searchInput.value="";brandFilter.value="all";render();if(!favorites.size){toast("لم تحفظ منتجات في المفضلة بعد.");return}grid.querySelectorAll(".product-card").forEach(card=>{const id=Number(card.querySelector("[data-fav]").dataset.fav);if(!favorites.has(id))card.style.display="none"});document.getElementById("resultCount").textContent=`${favorites.size} في المفضلة`;document.getElementById("products").scrollIntoView({behavior:"smooth"})});
-    document.getElementById("compareShortcut").addEventListener("click",showCompare);
+    document.getElementById("favoritesShortcut").addEventListener("click",()=>{favoritesOnly=true;selectedCategory="all";document.querySelectorAll(".category-card").forEach(c=>c.classList.toggle("active",c.dataset.category==="all"));searchInput.value="";brandFilter.value="all";render();document.getElementById("products").scrollIntoView({behavior:"smooth"})});
     document.getElementById("modalClose").addEventListener("click",()=>document.getElementById("modalBackdrop").style.display="none");
     document.getElementById("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")e.currentTarget.style.display="none"});
-    document.getElementById("newsletterForm").addEventListener("submit",e=>{e.preventDefault();toast("هذه واجهة تجريبية؛ لم يتم إرسال البريد أو حفظه.");e.target.reset()});
     document.getElementById("year").textContent=new Date().getFullYear();
     fillBrands();render();
   </script>
