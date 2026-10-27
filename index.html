@@ -70,10 +70,16 @@
     .search-symbol{position:absolute;right:14px;top:8px;color:var(--gold);font-size:20px}
     .filters{display:flex;gap:9px;flex-wrap:wrap}
     select{background:#131313;color:#eee5d4;border:1px solid #3b3020;border-radius:8px;padding:10px 12px;max-width:100%}
+
+    .image-fallback{height:100%;min-height:165px;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;text-align:center;background:radial-gradient(circle at 50% 35%,#3a2c12 0,#17130c 48%,#090909 100%);color:#f1d58b;box-sizing:border-box}
+    .image-fallback .fallback-mark{font-family:'Changa',sans-serif;letter-spacing:3px;font-weight:800;font-size:18px;color:#d8b45a}
+    .image-fallback strong{font-size:13px;line-height:1.6;color:#fff}
+    .image-fallback small{font-size:10px;line-height:1.5;color:#c9b987}
+
     .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
     .product-card{background:var(--panel);border:1px solid #29241b;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:.22s;min-width:0}
     .product-card:hover{border-color:#8e7139;transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.22)}
-    .product-image{height:220px;background:#f8f8f8;position:relative;overflow:hidden;border-bottom:1px solid #e7dfcf}.image-fallback{display:grid;place-items:center;height:100%;background:linear-gradient(135deg,#242016,#111);color:#d9b568;font:800 20px Cairo,sans-serif}
+    .product-image{height:220px;background:#f8f8f8;position:relative;overflow:hidden;border-bottom:1px solid #e7dfcf}.image-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;height:100%;min-height:165px;padding:16px;text-align:center;background:radial-gradient(circle at 50% 35%,#453719 0,#19150d 48%,#090909 100%);color:#d9b568;font:800 20px Cairo,sans-serif}.fallback-icon{display:none}.image-unavailable{background:radial-gradient(circle at 50% 35%,#453719 0,#19150d 48%,#090909 100%);border-bottom:1px solid #6e5524}.image-unavailable .fallback-mark{font-size:24px;letter-spacing:4px;color:#d9b568;font-weight:900}.image-unavailable small{color:#d5c79e;font-size:11px}.image-fallback strong{font-size:13px;line-height:1.6;color:#fff}.image-fallback small{font-size:10px;line-height:1.5;color:#d5c79e}
     .product-image img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s;padding:12px;background:#f7f7f7;opacity:1}
     .product-card:hover .product-image img{transform:scale(1.04)}
     .product-tag{position:absolute;top:12px;right:12px;background:#d9b568;color:#1a1409;padding:4px 9px;border-radius:4px;font-size:10px;font-weight:800}
@@ -89,6 +95,9 @@
     .product-note{color:#9f998e;font-size:10px;margin:6px 0 12px}
     .product-actions{display:flex;gap:8px;margin-top:4px}
     .product-actions button{flex:1;padding:11px 8px;border-radius:8px;font-size:13px;font-weight:800;font-family:'Cairo',sans-serif}
+    .details-btn{background:#201b12;border:1px solid #806735;color:#e7cf91;cursor:pointer}
+    .product-rating{font-size:11px;color:#d4bd7e;margin:5px 0}
+    .variant-note{background:#17140f;border:1px solid #3b3020;border-radius:8px;padding:10px;color:#ddd0b1;font-size:13px;line-height:1.8}
     .order-btn{background:linear-gradient(135deg,#d8b56a,#f2d98f);color:#171107;border:1px solid #f2d98f;box-shadow:0 4px 12px #d9b56820}.order-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
     .empty{grid-column:1/-1;text-align:center;color:#aaa;padding:40px;border:1px dashed #473a25;border-radius:12px}
     .brand-strip{display:flex;justify-content:center;align-items:center;gap:clamp(18px,4vw,55px);flex-wrap:wrap;padding:26px;border-block:1px solid #282116;color:#aaa18f;font-family:'Cairo',sans-serif;font-weight:800;font-size:clamp(15px,2vw,22px);letter-spacing:1px}
@@ -174,7 +183,7 @@
 
     <section class="section" id="products" style="padding-top:10px">
       <div class="container">
-        <div class="section-head"><div><div class="eyebrow">THE COLLECTION</div><h2 class="section-title">منتجات مختارة</h2><p class="section-desc">50 منتجًا من ماركات معروفة. الأسعار مستندة إلى صفحات رسمية ومتاجر سعودية مرصودة، وقد تتغير حسب العرض والسعة والتوفر.</p></div><div class="compare-count" id="resultCount">المنتجات</div></div>
+        <div class="section-head"><div><div class="eyebrow">THE ROYALIX COLLECTION</div><h2 class="section-title">منتجات مختارة</h2><p class="section-desc">50 منتجًا من ماركات معروفة. الأسعار مستندة إلى صفحات رسمية ومتاجر سعودية مرصودة، وقد تتغير حسب العرض والسعة والتوفر.</p></div><div class="compare-count" id="resultCount">المنتجات</div></div>
         <div class="toolbar">
           <div class="search-wrap"><span class="search-symbol">⌕</span><input id="searchInput" type="search" placeholder="ابحث باسم المنتج أو الماركة..." aria-label="البحث عن المنتجات"></div>
           <div class="filters">
@@ -278,7 +287,7 @@
       {id:28,brand:"Sony PlayStation",name:"DualSense — يد تحكم لاسلكية",category:"gaming",categoryAr:"الألعاب",price:299,tag:"PlayStation",desc:"يد تحكم لاسلكية لأجهزة PlayStation 5 مع استجابة لمسية ومحفزات تكيفية.",specs:"اهتزاز لمسي · محفزات تكيفية · ميكروفون مدمج · متوافقة مع PS5.",image:"https://puntoscolombia.vtexassets.com/arquivos/ids/33197307/711719574293.jpg?v=639172231093470000",source:"https://www.playstation.com/en-us/accessories/dualsense-wireless-controller/",sourceLabel:"PlayStation — المواصفات الرسمية"}
     ];
     // ضع رقم واتساب المتجر الدولي بدون + أو مسافات (مثال: 9665XXXXXXXX).
-    const WHATSAPP_NUMBER = "PUT_STORE_NUMBER_HERE";
+    const WHATSAPP_NUMBER = "966575398618";
     let selectedCategory="all", favorites=new Set();
     try { favorites = new Set(JSON.parse(localStorage.getItem("royalix-favorites") || "[]").map(Number)); } catch (_) { favorites = new Set(); }
     let favoritesOnly=false;
@@ -301,18 +310,26 @@
       if(!list.length){grid.innerHTML=`<div class="empty">${favoritesOnly?"لا توجد منتجات محفوظة في المفضلة بعد.":"لا توجد منتجات مطابقة. جرّب كلمة بحث أو تصنيفًا آخر."}</div>`;updateCounts();return}
       list.forEach(p=>{
         const card=document.createElement("article");card.className="product-card";
-        card.innerHTML=`<div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="product-tag">${p.tag}</span><button class="fav-btn ${favorites.has(p.id)?"on":""}" data-fav="${p.id}" aria-label="${favorites.has(p.id)?"إزالة من المفضلة":"إضافة إلى المفضلة"}">${favorites.has(p.id)?"♥":"♡"}</button></div>
-        <div class="product-info"><div class="product-brand">${p.brand} · ${p.categoryAr}</div><h3>${p.name}</h3><p class="product-desc">${p.desc}</p><div class="product-bottom"><div class="price-box"><span>${money(p.price)}</span></div><div class="product-note">قد يتغير السعر حسب العرض والتوفر</div><div class="product-actions"><button class="order-btn" data-order="${p.id}">اطلب عبر واتساب <span aria-hidden="true">↗</span></button></div></div></div>`;
-        const productImg=card.querySelector("img");productImg.addEventListener("error",()=>{card.remove();updateCounts();},{once:true});
+        card.innerHTML=`<div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous"><span class="product-tag">${p.tag}</span><button class="fav-btn ${favorites.has(p.id)?"on":""}" data-fav="${p.id}" aria-label="${favorites.has(p.id)?"إزالة من المفضلة":"إضافة إلى المفضلة"}">${favorites.has(p.id)?"♥":"♡"}</button></div>
+        <div class="product-info"><div class="product-brand">${p.brand} · ${p.categoryAr}</div><h3>${p.name}</h3><p class="product-desc">${p.desc}</p><div class="product-bottom"><div class="price-box"><span>${money(p.price)}</span></div><div class="product-actions"><button class="details-btn" data-details="${p.id}">التفاصيل</button><button class="order-btn" data-order="${p.id}">اطلب عبر واتساب <span aria-hidden="true">↗</span></button></div></div></div>`;
+        const productImg=card.querySelector("img");
+        productImg.addEventListener("error",()=>{
+          productImg.style.display="none";
+          const fallback=document.createElement("div");
+          fallback.className="image-fallback image-unavailable";
+          fallback.innerHTML=`<span class="fallback-mark">ROYALIX</span><strong>${p.name}</strong><small>الصورة غير متاحة من المصدر</small>`;
+          productImg.parentElement.prepend(fallback);
+        },{once:true});
         grid.appendChild(card);
       });
       updateCounts();
     }
     function fillBrands(){[...new Set(products.map(p=>p.brand))].sort().forEach(b=>{const o=document.createElement("option");o.value=b;o.textContent=b;brandFilter.appendChild(o)})}
-    function showDetails(id){const p=products.find(x=>x.id===id);document.getElementById("modalContent").innerHTML=`<div class="eyebrow">${p.brand} · ${p.categoryAr}</div><h2 id="modalTitle">${p.name}</h2><p>${p.desc}</p><p>${p.specs}</p><div class="price-box">${money(p.price)}</div><p style="color:#bdb3a0;font-size:12px">السعر المرصود إرشادي وقد يتغير؛ تحقق من السعر النهائي والتوفر والضمان والشحن قبل الطلب.</p><p><a class="btn btn-primary" href="${p.source}" target="_blank" rel="noopener noreferrer">${p.sourceLabel} ↗</a></p>`;document.getElementById("modalBackdrop").style.display="grid"}
+    function showDetails(id){const p=products.find(x=>x.id===id);document.getElementById("modalContent").innerHTML=`<div class="eyebrow">${p.brand} · ${p.categoryAr}</div><h2 id="modalTitle">${p.name}</h2><p>${p.desc}</p><h3>المواصفات</h3><p>${p.specs}</p><div class="price-box">${money(p.price)}</div><div class="variant-note"><strong>الألوان والمقاسات والسعات:</strong><br>تختلف حسب إصدار المنتج والمخزون لدى المورد. يرجى تأكيد الخيار المتاح قبل الطلب.</div><p><a class="btn btn-primary" href="${p.source}" target="_blank" rel="noopener noreferrer">${p.sourceLabel} ↗</a></p>`;document.getElementById("modalBackdrop").style.display="grid"}
     document.addEventListener("click",e=>{
       const cat=e.target.closest("[data-category]");if(cat){favoritesOnly=false;selectedCategory=cat.dataset.category;document.querySelectorAll(".category-card").forEach(c=>c.classList.toggle("active",c===cat));render();document.getElementById("products").scrollIntoView({behavior:"smooth"});return}
       const fav=e.target.closest("[data-fav]");if(fav){const id=Number(fav.dataset.fav);if(favorites.has(id))favorites.delete(id);else favorites.add(id);saveFavorites();render();toast(favorites.has(id)?"أُضيف المنتج إلى المفضلة":"أُزيل المنتج من المفضلة");return}
+      const details=e.target.closest("[data-details]");if(details){showDetails(Number(details.dataset.details));return;}
       const order=e.target.closest("[data-order]");if(order){const product=products.find(p=>p.id===Number(order.dataset.order));if(!/^\d{8,15}$/.test(WHATSAPP_NUMBER)){toast("زر واتساب جاهز — أضف رقم المتجر أولًا");return;}const msg=`مرحبًا ROYALIX، أريد الاستفسار وطلب المنتج: ${product.name} — السعر المعروض ${money(product.price)}. هل المنتج متوفر؟`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,"_blank","noopener,noreferrer");return}
     });
     searchInput.addEventListener("input",render);brandFilter.addEventListener("change",render);sortFilter.addEventListener("change",render);
